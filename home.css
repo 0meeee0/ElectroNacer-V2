@@ -1,0 +1,11 @@
+body{
+    overflow-x: hidden;
+}
+#imaj{
+    height: 50vh;
+    width: 100vw;
+    position: block;
+}
+.mrl{
+    display: flex;
+}
