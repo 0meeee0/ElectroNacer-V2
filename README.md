@@ -1,1 +1,2 @@
-# brief-6
+# ElectroNacer
+ElectroNacer veut améliorer son application web à partir d’une simple application web qui affiche uniquement la quantité de stock à une application pour gérer ses produits électroniques et robotiques et son stock. Le but de cette application est de gérer entièrement les produits et les catégories des magasins, de maintenir un état de stock équitable, d’éviter les ruptures de stock et d’assurer un point de gestion entre l’offre et la consommation pour chaque article;
