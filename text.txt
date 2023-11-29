@@ -1,0 +1,89 @@
+Contexte du projet
+ElectroNacer veut améliorer son application web à partir d’une simple application web qui affiche uniquement la quantité de stock à une application pour gérer ses produits électroniques et robotiques et son stock. Le but de cette application est de gérer entièrement les produits et les catégories des magasins, de maintenir un état de stock équitable, d’éviter les ruptures de stock et d’assurer un point de gestion entre l’offre et la consommation pour chaque article;
+
+Description et contraintes :
+
+Un utilisateur est défini par email, mot de passe et login.
+Un admin est défini par email, mot de passe et login.
+Un produit est défini par sa référence, son étiquette, son code à barres, son prix d’achat, son prix final. Offre de prix, description, quantite_min, quantite_stock.
+Une catégorie est définie par un nom, une description, une photo.
+un produit peut avoir une seule et unique catégorie.
+Un utilisateur peut consulter la liste de tous les produits .
+Un administrateur peut ajouter/modifier/masquer un ou plusieurs produits.
+Un administrateur peut ajouter/modifier/masquer une ou plusieurs catégories.
+Un administrateur peut valider ou supprimer l’inscription d’un visiteur .
+Un administrateur peut afficher la liste des utilisateurs .
+​
+
+Vous créez un site qui contient :
+
+une page d’authentification qui contient un formulaire qui permet à l’utilisateur d’insérer son nom d’utilisateur et son mot de passe et de le rediriger vers la page d’accueil.
+une page d'inscription qui permet à un visiteur de créer un compte en tant utilisateur .
+une page d’accueil qui affiche tous les produits en stock avec une pagination et un filtre pour sélectionner les produits par catégorie, prix..., avec la possibilité d’ajouter un nouveau produit, de mettre à jour ou de supprimer un produit existant.
+une page de catégorie qui affiche toutes les catégories avec la possibilité d’ajouter une nouvelle catégorie, de mettre à jour ou de supprimer une catégorie existante.
+une page utilisateurs qui affiche tous les utilisateurs validés et non validés avec la possibilité de valider et de supprimer les utilisateurs non validés, et la possibilité de transformer un utilisateur validé en administrateur.
+​
+
+Contraintes technologiques :
+
+L'application doit être programmée en php procédural.
+L'utilisation de Bootstrap/Tailwind Utilisation de JS
+Utilisation de sous-requêtes
+Utilisation de AJAX pour le filtre (optionnel)
+Utilisation du Sass pour adapter Bootstrap (optionnel)
+​
+
+Avancement du projet :
+
+Vous devez tenir des réunions de validation avec le *product owner *(représenté par le formateur) pour chaque produit livrable. et pour répondre aux phases du projet, un livrable est demandé à la fin de chaque phase :
+
+Phase 1 Trello : estimation de charge 0,5 J Planification et répartition des tâches dans trello
+Phase 2 Conception : estimation de la charge : 1 D, Considérer la modélisation fournie pour les cas présentés :
+Diagramme de cas d’utilisation.
+Diagramme de classe.
+Diagramme de séquence.
+Phase 3 Développement frontal : estimation de charge : 2 D
+Créer une structure d’application avec HTML/CSS/JS (Bonus : SASS)
+Phase 4 Création de base de données : estimation de charge : 0,5 J
+Créez une base de données en utilisant Mysql/Phpmyadmin.
+Phase 5 Développement back-end : estimation de charge : 2D
+Implémenter la logique backend avec PHP et l’intégrer avec le front-end.
+Modalités pédagogiques
+Travail individuel . Délai : 6 jours.
+
+Date d'assignement de Brief : 21/11/2023 à 09:30.
+
+Date limite de soumission : 28/11/2023 avant 23:59.
+
+Modalités d'évaluation
+Vous êtes amené à réaliser une présentation.
+Présentation de 20 minutes :
+5 minutes : Démonstration de livrable.
+10 minutes : Explication partie code.
+5 minutes : évaluation des savoirs(Q/A)
+
+Livrables
+Premier livrable : 22/11/2023 à 14h00
+          |__ Le fichier final de conception UML 
+          |__ Lien de planification finale (Trello, ...)
+
+Deuxième livrable : 24/11/2023 à 14h00
+          |__ Lien vers le référentiel GitHub contenant :
+          |__ Le code source du site en HTML / CSS / JS avec tous les fichiers nécessaires.
+
+Troisième livrable : 28/11/2023 avant 23:59.
+          |__ Lien vers le référentiel GitHub contenant :
+          |__ Le code source du site en HTML / CSS / JS / PHP avec tous les fichiers nécessaires.
+          |__ Le fichier final de conception UML
+          |__ le fichier SQL qui contient toutes les requêtes utilisées dans la réalisation de l’application.
+          |__ Une planification des tâches.
+          |__ README.
+
+Critères de performance
+Présentation bien structurée.
+Livrable présentable.
+Bonne documentation.
+Bonne maitrise et compréhension.
+Conformité aux Bonnes Pratiques (Normalisation des Tables/ Optimisation des scripts SQL / Contraintes d'intégrité (PK, FK)/ Check/  …).
+Utilisations des sous requêtes en premier temps.
+Extensibilité (Votre projet doit être extensible. Càd : il devrait être facile d'ajouter de nouveaux éléments ou relations sans avoir à tout réorganiser.)
