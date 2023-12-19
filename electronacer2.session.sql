@@ -1,5 +1,4 @@
 USE electronacer2;
-
 --@block
 CREATE TABLE user(
     identifiant INT PRIMARY KEY AUTO_INCREMENT,
@@ -25,6 +24,9 @@ CREATE TABLE category(
 
 --@block
 INSERT INTO admin (identifiant, email, pass) VALUES ("mehdi", "mehdi74.id@gmail.com", "123");
+--@block
+INSERT INTO user (identifiant, username, email, pass, bl) VALUES (1, "user", "user@user.com", "123", true);
+
 
 --@block
 CREATE TABLE Products (

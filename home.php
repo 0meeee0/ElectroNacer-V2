@@ -1,37 +1,8 @@
 <?php
-    include 'getProd.php';
-    $servername = "localhost";
-    $username = "root";
-    $password = "123";
-    $dbname = "electronacer2";
-
-  
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
+    include 'test.php';
 
     // Fetch categorys from the database
 $categorysResult = $conn->query("SELECT DISTINCT category FROM products");
-
-// Fetch products based on the selected category filter
-$categoryFilter = isset($_GET['category']) ? $_GET['category'] : null;
-
-if ($categoryFilter) {
-    
-    $categoryString = "'" . implode("','", $categoryFilter) . "'";
-
-    
-    $sql = "SELECT * FROM products WHERE category IN ($categoryString)";
-    $result = $conn->query($sql);
-} else {
-    
-    $result = $conn->query("SELECT * FROM products");
-}
-$categorysResult = $conn->query("SELECT DISTINCT category FROM products");
-
 
 $categoryFilter = isset($_GET['category']) ? $_GET['category'] : null;
 
@@ -52,7 +23,7 @@ if ($categoryFilter) {
     $result = $conn->query($sql);
 } else {
     
-    $result = $conn->query("SELECT * FROM products");
+    $result = $conn->query("SELECT * FROM products WHERE `show`=TRUE");
 
     
     if ($stockFilter) {
@@ -60,9 +31,6 @@ if ($categoryFilter) {
     }
 }
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,12 +43,12 @@ if ($categoryFilter) {
     <link rel="stylesheet" href="home.css">
 </head>
 
-<body>
+<body style="background-color: whitesmoke">
     
     <nav class="navbar navbar-dark bg-primary justify-content-around">
         <a href="#" class="navbar-brand">ElectroNacer</a>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">Welcome username</li>
+            <li class="nav-item">Welcome <b> <?php echo $_SESSION['identifiant']?> </b></li>
         </ul>
     </nav>
     
@@ -110,32 +78,32 @@ if ($categoryFilter) {
 				<div class="row justify-content-center text-center">
 						<div class="col-md-8 col-lg-6">
 								<div class="header">
-										<h2>Products</h2>
+										<h2 class="display-6">Products</h2>
 								</div>
 						</div>
 				</div>
 
-                <div class="container mt-4">
-        <form action="" method="get" class="row mt-4 justify-content-center">
-        <h1>categorys:</h1>
-        <?php
-        // Display checkboxes for each category
-        while ($row = $categorysResult->fetch_assoc()) {
-            $categoryName = $row['category'];
-            ?>
-            <div class="form-check form-check-inline col-md">
-                <input class="form-check-input" type="checkbox" name="category[]" value="<?php echo $categoryName; ?>" <?php if (is_array($categoryFilter) && in_array($categoryName, $categoryFilter)) echo 'checked'; ?>>
-                <label class="form-check-label"><?php echo $categoryName; ?></label>
-            </div>
+        <div class="container">
+        <form action="" method="get" class="row justify-content-center">
+            <h1>categories:</h1>
             <?php
-        }
-        ?>
-         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="stock" value="low" <?php if ($stockFilter) echo 'checked'; ?>>
-            <label class="form-check-label">repture</label>
-        </div>
-        <button type="submit" class="btn btn-primary w-25 mb-5">Filter</button>
-    </form>
+            // Display checkboxes for each category
+            while ($row = $categorysResult->fetch_assoc()) {
+                $categoryName = $row['category'];
+                ?>
+                <div class="form-check form-check-inline col-md">
+                    <input class="form-check-input" type="checkbox" name="category[]" value="<?php echo $categoryName; ?>" <?php if (is_array($categoryFilter) && in_array($categoryName, $categoryFilter)) echo 'checked'; ?>>
+                    <label class="form-check-label"><?php echo $categoryName; ?></label>
+                </div>
+                <?php
+            }
+            ?>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="stock" value="low" <?php if ($stockFilter) echo 'checked'; ?>>
+                <label class="form-check-label">repture</label>
+            </div>
+            <button type="submit" class="btn btn-primary w-25 mb-5">Filter</button>
+        </form>
 
     <div class="row">
         <?php
@@ -156,193 +124,17 @@ if ($categoryFilter) {
                             Category: <?php echo $item['Category']; ?>
                         </p>
                         <p class="text-decoration-line-through">
-                            Price: <?php echo $item['FinalPrice']; ?><?php echo ' DH'?>
+                             Price: <?php echo $item['FinalPrice']; ?><?php echo ' DH'?>
                         </p>
                     </div>
                 </div>
             </div>
             <?php
-        }
+            }
         ?>
+        </div>
     </div>
-</div>
 
-
-                <!-- <div class=" display-6 d-md-flex justify-content-between gap-5 text-center pb-5">
-                    <a class="text-bg-dark">Laptops</a>
-                    <a class="text-bg-dark">Phones</a>
-                    <a class="text-bg-dark">Electromenager</a>
-                    <a class="text-bg-dark">Consoles</a>
-                    <a class="text-bg-dark">Repture</a>
-                </div>
-				<div class="row">
-						 
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-1" class="single-product">
-										
-										<div class="part-2">
-                                            <img src="imgs/a1.jpg" alt="">
-												<h3 class="product-title">ITEM</h3>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						 
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-2" class="single-product">
-										
-										<div class="part-2">
-                                            <img src="imgs/a2.jpg" alt="">
-												<h3 class="product-title">ITEM</h3>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						 
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-3" class="single-product">
-										
-										<div class="part-2">
-                                            <img src="imgs/a3.jpg" alt="">
-												<h3 class="product-title">ITEM</h3>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						 
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-4" class="single-product">
-										
-										<div class="part-2">
-                                            <img src="imgs/a4.jpg" alt="">
-												<h3 class="product-title">ITEM</h3>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						 
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-1" class="single-product">
-										
-										<div class="part-2">
-                                            <img src="imgs/b1.jpg" alt="">
-												<h3 class="product-title">ITEM</h3>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						 
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-2" class="single-product">
-										
-										<div class="part-2">
-                                            <img src="imgs/b2.jpg" alt="">
-												<h3 class="product-title">ITEM</h3>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						 
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-3" class="single-product">
-										
-										<div class="part-2">
-                                            <img src="imgs/b3.jpg" alt="">
-												<h3 class="product-title">ITEM</h3>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-						 
-						<div class="col-md-6 col-lg-4 col-xl-3">
-								<div id="product-4" class="single-product">
-										
-										<div class="part-2">
-                                            <img src="imgs/b4.jpg" alt="">
-												<h3 class="product-title">ITEM</h3>
-												<h4 class="product-price">$49.99</h4>
-										</div>
-								</div>
-						</div>
-                        <div class="col-md-6 col-lg-4 col-xl-3">
-                            <div id="product-1" class="single-product">
-                                    
-                                    <div class="part-2">
-                                        <img src="imgs/c1.jpg" alt="">
-                                            <h3 class="product-title">ITEM</h3>
-                                            <h4 class="product-price">$49.99</h4>
-                                    </div>
-                            </div>
-                    </div>
-                     
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                            <div id="product-2" class="single-product">
-                                    
-                                    <div class="part-2">
-                                        <img src="imgs/c2.jpg" alt="">
-                                            <h3 class="product-title">ITEM</h3>
-                                            <h4 class="product-price">$49.99</h4>
-                                    </div>
-                            </div>
-                    </div>
-                     
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                            <div id="product-3" class="single-product">
-                                    
-                                    <div class="part-2">
-                                        <img src="imgs/c3.jpg" alt="">
-                                            <h3 class="product-title">ITEM</h3>
-                                            <h4 class="product-price">$49.99</h4>
-                                    </div>
-                            </div>
-                    </div>
-                     
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                            <div id="product-4" class="single-product">
-                                    
-                                    <div class="part-2">
-                                        <img src="imgs/c4.jpg" alt="">
-                                            <h3 class="product-title">ITEM</h3>
-                                            <h4 class="product-price">$49.99</h4>
-                                    </div>
-                            </div>
-                    </div>
-                     
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                            <div id="product-1" class="single-product">
-                                    
-                                    <div class="part-2">
-                                        <img src="imgs/d1.jpg" alt="">
-                                            <h3 class="product-title">ITEM</h3>
-                                            <h4 class="product-price">$49.99</h4>
-                                    </div>
-                            </div>
-                    </div>
-                     
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                            <div id="product-2" class="single-product">
-                                    
-                                    <div class="part-2">
-                                        <img src="imgs/d2.jpg" alt="">
-                                            <h3 class="product-title">ITEM</h3>
-                                            <h4 class="product-price">$49.99</h4>
-                                    </div>
-                            </div>
-                    </div>
-                     
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                            <div id="product-3" class="single-product">
-                                    
-                                    <div class="part-2">
-                                        <img src="imgs/d3.jpg" alt="">
-                                            <h3 class="product-title">ITEM</h3>
-                                            <h4 class="product-price">$49.99</h4>
-                                    </div>
-                            </div>
-                    </div>
-            
-				</div>
-		</div>-->
 </section> 
 
 
@@ -350,11 +142,8 @@ if ($categoryFilter) {
 
 
 <footer class=" bg-dark text-light text-center text-lg-start">
-    <!-- Grid container -->
     <div class="container p-4">
-      <!--Grid row-->
       <div class="row">
-        <!--Grid column-->
         <div class=" mb-4 mb-md-0">
           <h5 class="text-uppercase">ElectroNacer</h5>
   
@@ -364,20 +153,14 @@ if ($categoryFilter) {
             voluptatem veniam, est atque cumque eum delectus sint!
           </p>
         </div>
-        <!--Grid column-->
-  
+ 
     
       </div>
-      <!--Grid row-->
     </div>
-    <!-- Grid container -->
   
-    <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
-      © 2020 Copyright:ElectroNacer
-      <a class="text-body" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      © 2023 Copyright:ElectroNacer
     </div>
-    <!-- Copyright -->
   </footer>
     
 

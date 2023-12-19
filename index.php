@@ -22,7 +22,7 @@
             <button>Login</button>
             <div class="sp">
                 <span>New member?</span>
-                <a href="register.html">Sign up</a>
+                <a href="register.php">Sign up</a>
             </div>
         </form>
     </div>
